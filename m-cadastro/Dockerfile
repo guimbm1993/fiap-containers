@@ -1,5 +1,6 @@
-FROM openjdk:11-jdk
+FROM maven:3.6.3-jdk-11-slim
+COPY . /usr/src/myapp
+WORKDIR /usr/src/myapp
+RUN mvn clean package -Dmaven.test.skip=true
+CMD java -jar ./target/m-cadastro-0.0.1-SNAPSHOT.jar
 EXPOSE 8080
-ARG JAR_FILE=target/m-cadastro-0.0.1-SNAPSHOT.jar
-ADD ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]

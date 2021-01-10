@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: fiap37scj
+      MYSQL_DATABASE: cadastro_usuario
+      MYSQL_USER: teste
+      MYSQL_PASSWORD: fiap2020
+
+  spring1:
+    depends_on:
+      - db
+    build: .
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_USER: teste
+      DB_PASSWORD: fiap2020
+      DB_NAME: cadastro_usuario
+  spring2:
+    depends_on:
+      - db
+    build: .
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_USER: teste
+      DB_PASSWORD: fiap2020
+      DB_NAME: cadastro_usuario
+  loadbalance:
+    depends_on:
+      - spring1
+      - spring2
+    image: nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    command: [ nginx-debug, '-g', 'daemon off;' ]
