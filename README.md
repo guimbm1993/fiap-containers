@@ -7,3 +7,7 @@
  
 ## Recursos úteis ##
 Dentro da pasta resources do projeto, existe uma collection do Postman para teste dos endpoints.
+
+## Link para imagem pública da api, disponível no Docker Hub ##
+[Imagem pública da API](https://hub.docker.com/repository/docker/guimbm93/mcadastro)
+Usar a imagem:  `guimbm93/mcadastro:1.0.6`
